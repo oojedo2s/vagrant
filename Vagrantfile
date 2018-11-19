@@ -15,5 +15,9 @@ Vagrant.configure("2") do |config|
     test.cpus = CPU_NO
   end
   config.vm.network "private_network", ip: "172.16.0.100", netmask: "255.255.255.0"
-  config.vm.provision "shell", path: "~/GIT/vagrant/provision/script01.sh"
+#  config.vm.provision "shell", path: "~/GIT/vagrant/provision/script01.sh"
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.compatibility_mode = "2.0"
+    ansible.playbook = "playbook.yml"
+  end
 end
